@@ -26,7 +26,7 @@ fi
 
 unset rc
 
-alias dotfiles='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # Functions
 setup_machine() {
