@@ -26,7 +26,7 @@ fi
 
 unset rc
 
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/dotfiles/ --work-tree=$HOME'
 
 # Functions
 setup_machine() {
@@ -88,8 +88,10 @@ setup_machine() {
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
     # Copying config files
-    sudo cp ./config/firefox/policies.json /usr/lib64/firefox/distribution/policies.json
-    cp ./config/vscode/settings.json $HOME/.var/app/com.visualstudio.code/config/Code/User/settings.json # VSCode for flatpak.
+    git clone https://github.com/gohanko/app-configs
+    sudo cp ./app-configs/firefox/policies.json /usr/lib64/firefox/distribution/policies.json
+    cp ./app-configs/vscode/settings.json $HOME/.var/app/com.visualstudio.code/config/Code/User/settings.json # VSCode for flatpak.
+    rm -rf ./app-configs/
 
     echo "Please restart the machine for changes to take effect."
 }
