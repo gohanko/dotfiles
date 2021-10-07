@@ -12,6 +12,13 @@ setup_zsh() {
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 }
 
+unsetup_zsh() {
+    sudo chsh -s $(which bash)
+    rm -rf .p10k.zsh .zsh_history .zshrc
+    sh ~/.oh-my-zsh/tools/uninstall.sh
+    sudo dnf remove zsh -y
+}
+
 setup_machine() {
     sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:mkittler/Fedora_34/home:mkittler.repo
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -60,7 +67,7 @@ setup_machine() {
     rfkill block bluetooth
     hostnamectl set-hostname lightblue
 
-    setup_zsh()
+    setup_zsh
 
     # Copying config files
     git clone https://github.com/gohanko/app-configs
