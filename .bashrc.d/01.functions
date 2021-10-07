@@ -1,24 +1,5 @@
 #!/bin/bash
 
-setup_zsh() {
-    # Installing and configuring ZSH
-    sudo chsh -s $(which zsh)
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-    git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
-    
-    # power10k zsh theme
-    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-}
-
-unsetup_zsh() {
-    sudo chsh -s $(which bash)
-    rm -rf .p10k.zsh .zsh_history .zshrc
-    sh ~/.oh-my-zsh/tools/uninstall.sh
-    sudo dnf remove zsh -y
-}
-
 setup_machine() {
     sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:mkittler/Fedora_34/home:mkittler.repo
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -27,7 +8,7 @@ setup_machine() {
     flatpak update -y
 
     # Install our packages
-    sudo dnf install -y gnome-tweaks syncthing syncthingtray zsh util-linux-user yaru-theme
+    sudo dnf install -y gnome-tweaks syncthing syncthingtray util-linux-user yaru-theme
     flatpak install -y flathub com.visualstudio.code com.github.johnfactotum.Foliate org.keepassxc.KeepassXC org.qbittorrent.qBittorrent org.telegram.desktop com.discordapp.Discord
 
     # Remove uneeded packages
@@ -66,8 +47,6 @@ setup_machine() {
     # Setting system settings
     rfkill block bluetooth
     hostnamectl set-hostname lightblue
-
-    setup_zsh
 
     # Copying config files
     git clone https://github.com/gohanko/app-configs
