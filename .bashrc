@@ -16,4 +16,5 @@ export PATH
 for file in ~/.{functions,aliases}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
+
 unset file;
