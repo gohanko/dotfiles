@@ -1,23 +1,21 @@
 #!/bin/bash
 
-install_app_configs() {
-    git clone https://github.com/gohanko/application-configurations
-    sudo cp ./application-configurations/firefox/policies.json /usr/lib64/firefox/distribution/policies.json
-    mkdir -p $HOME/.var/app/com.visualstudio.code/config/Code/User/
-    sudo cp ./application-configurations/vscode/settings.json  $HOME/.var/app/com.visualstudio.code/config/Code/User/settings.json
+copy_config() {
+    git clone https://github.com/gohanko/app-configs
+    sudo cp ./app-configs/firefox/policies.json /usr/lib64/firefox/distribution/policies.json
+    cp ./app-configs/vscode/settings.json  ~/.var/app/com.visualstudio.code/config/Code/User/settings.json
     rm -rf ./app-configs/
 }
 
 setup_machine() {
-    # Add DNF repo for syncthingtray and Flatpak repo for more Flatpaks!
     sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:mkittler/Fedora_34/home:mkittler.repo
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-    # Update the whole system
     sudo dnf update -y
     flatpak update -y
 
     # Install our packages
-    sudo dnf install -y gnome-tweaks syncthing syncthingtray util-linux-user yaru-theme
+    sudo dnf install -y gnome-tweaks syncthing syncthingtray util-linux-user yaru-theme tlp
     flatpak install -y flathub com.visualstudio.code com.github.johnfactotum.Foliate org.keepassxc.KeepassXC org.qbittorrent.qBittorrent org.telegram.desktop com.discordapp.Discord
 
     # Remove uneeded packages
@@ -55,9 +53,13 @@ setup_machine() {
 
     # Setting system settings
     rfkill block bluetooth
+    hostnamectl set-hostname lightblue
 
-    # Install app configs
-    install_app_configs
+    # Set battery charge treshold
+    sudo tlp setcharge 85 90
+
+    # Copying config files
+    copy_config
 
     echo "Please restart the machine for some changes to take effect."
 }
