@@ -7,12 +7,17 @@ copy_config() {
     rm -rf ./app-configs/
 }
 
+update_system() {
+    sudo dnf update -y
+    sudo dnf autoremove -y
+    flatpak update -y
+}
+
 setup_machine() {
     sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:mkittler/Fedora_34/home:mkittler.repo
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-    sudo dnf update -y
-    flatpak update -y
+    update_system
 
     # Install our packages
     sudo dnf install -y gnome-tweaks syncthing syncthingtray util-linux-user yaru-theme tlp
