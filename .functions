@@ -27,7 +27,6 @@ setup_machine() {
     gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
     gsettings set org.gnome.desktop.interface icon-theme Yaru
     gsettings set org.gnome.desktop.interface show-battery-percentage true
-    gsettings set org.gnome.desktop.peripherals.mouse accel-profile flat
 
     # Setting background picture
     gsettings set org.gnome.desktop.screensaver picture-options zoom
@@ -51,11 +50,30 @@ setup_machine() {
     gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$GNOME_TERMINAL_PROFILE/ background-color 'rgb(23,20,33)'
     gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$GNOME_TERMINAL_PROFILE/ use-system-font false
 
+    # Set touchpad accel profile and speed.
+    gsettings set org.gnome.desktop.peripherals.mouse accel-profile flat
+    gsettings set org.gnome.desktop.peripherals.touchpad speed 0.365
+
+    # Set favourite apps
+    gsettings set org.gnome.shell favorite-apps "['firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Software.desktop', 'org.keepassxc.KeePassXC.desktop', 'org.qbittorrent.qBittorrent.desktop', 'com.discordapp.Discord.desktop', 'org.telegram.desktop.desktop', 'com.github.johnfactotum.Foliate.desktop', 'com.visualstudio.code.desktop']"
+
     # Setting system settings
     rfkill block bluetooth
 
     # Set battery charge treshold
     sudo tlp setcharge 85 90
+
+    # Setup Nautilus
+    mkdir ~/Syncthing/
+    echo "file:///$HOME/Syncthing/" >> ~/.config/gtk-3.0/bookmarks
+    mkdir ~/Workspace/
+    echo "file:///$HOME/Workspace/" >> ~/.config/gtk-3.0/bookmarks
+
+    # Prepare Syncthing folder for syncing.
+    mkdir ~/Syncthing/'Online Authentication'/
+    mkdir ~/Syncthing/Signal/
+    mkdir ~/Syncthing/Tachiyomi/
+    mkdir ~/Syncthing/WhatsApp/Databases/
 
     # Copying config files
     git clone https://github.com/gohanko/app-configs
