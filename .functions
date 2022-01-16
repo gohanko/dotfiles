@@ -47,9 +47,6 @@ setup_machine() {
     # Setting system settings
     rfkill block bluetooth
 
-    # Set battery charge treshold
-    sudo tlp setcharge 85 90
-
     # Setup Nautilus
     mkdir ~/Syncthing/
     echo "file:///$HOME/Syncthing/" >> ~/.config/gtk-3.0/bookmarks
@@ -75,6 +72,9 @@ setup_machine() {
     # Remove uneeded packages
     sudo dnf remove -y gnome-weather gnome-help gnome-photos gnome-tour gnome-contacts gnome-calendar gnome-abrt libreoffice-writer libreoffice-calc  libreoffice-impress
     sudo dnf autoremove -y
+
+    # Set battery charge treshold
+    sudo tlp setcharge 85 90
 
     # Copying config files
     git clone https://github.com/gohanko/app-configs
