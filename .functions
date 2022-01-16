@@ -1,13 +1,25 @@
 #!/bin/bash
 
-copy_config() {
-    git clone https://github.com/gohanko/app-configs
-    sudo cp ./app-configs/firefox/policies.json /usr/lib64/firefox/distribution/policies.json
-    cp ./app-configs/vscode/settings.json  ~/.var/app/com.visualstudio.code/config/Code/User/settings.json
-    rm -rf ./app-configs/
+update_system() {
+    sudo dnf update -y
+    sudo dnf autoremove -y
+    flatpak update -y
 }
 
-setting_gsettings() {
+setup_machine() {
+    sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:mkittler/Fedora_34/home:mkittler.repo
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+    update_system
+
+    # Install our packages
+    sudo dnf install -y gnome-tweaks syncthing syncthingtray util-linux-user yaru-theme tlp
+    flatpak install -y flathub com.visualstudio.code com.github.johnfactotum.Foliate org.keepassxc.KeepassXC org.qbittorrent.qBittorrent org.telegram.desktop com.discordapp.Discord
+
+    # Remove uneeded packages
+    sudo dnf remove -y gnome-weather gnome-help gnome-photos gnome-tour gnome-contacts gnome-calendar gnome-abrt
+    sudo dnf autoremove -y
+
     # Setting gnome shell styles
     gsettings set org.gnome.desktop.wm.preferences button-layout appmenu:minimize,maximize,close
     gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
@@ -36,29 +48,6 @@ setting_gsettings() {
     gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$GNOME_TERMINAL_PROFILE/ foreground-color 'rgb(208,207,204)'
     gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$GNOME_TERMINAL_PROFILE/ background-color 'rgb(23,20,33)'
     gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:$GNOME_TERMINAL_PROFILE/ use-system-font false
-}
-
-update_system() {
-    sudo dnf update -y
-    sudo dnf autoremove -y
-    flatpak update -y
-}
-
-setup_machine() {
-    sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:mkittler/Fedora_34/home:mkittler.repo
-    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
-    update_system
-
-    # Install our packages
-    sudo dnf install -y gnome-tweaks syncthing syncthingtray util-linux-user yaru-theme tlp
-    flatpak install -y flathub com.visualstudio.code com.github.johnfactotum.Foliate org.keepassxc.KeepassXC org.qbittorrent.qBittorrent org.telegram.desktop com.discordapp.Discord
-
-    # Remove uneeded packages
-    sudo dnf remove -y gnome-weather gnome-help gnome-photos gnome-tour gnome-contacts gnome-calendar gnome-abrt
-    sudo dnf autoremove -y
-
-    setting_gsettings
 
     # Setting system settings
     rfkill block bluetooth
@@ -67,7 +56,10 @@ setup_machine() {
     sudo tlp setcharge 85 90
 
     # Copying config files
-    copy_config
+    git clone https://github.com/gohanko/app-configs
+    sudo cp ./app-configs/firefox/policies.json /usr/lib64/firefox/distribution/policies.json
+    cp ./app-configs/vscode/settings.json  ~/.var/app/com.visualstudio.code/config/Code/User/settings.json
+    rm -rf ./app-configs/
 
     echo "Please restart the machine for some changes to take effect."
 }
