@@ -51,7 +51,7 @@ setup_machine() {
     update_system
 
     # Install our packages
-    sudo rpm-ostree install -y gnome-tweaks syncthing syncthingtray util-linux-user yaru-theme tlp
+    sudo dnf install -y gnome-tweaks syncthing syncthingtray util-linux-user yaru-theme tlp
     flatpak install -y flathub com.visualstudio.code com.github.johnfactotum.Foliate org.keepassxc.KeepassXC org.qbittorrent.qBittorrent org.telegram.desktop com.discordapp.Discord
 
     # Remove uneeded packages
