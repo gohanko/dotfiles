@@ -58,6 +58,7 @@ setup_machine() {
     # Copying config files
     git clone https://github.com/gohanko/app-configs
     sudo cp ./app-configs/firefox/policies.json /usr/lib64/firefox/distribution/policies.json
+    mkdir -p ~/.var/app/com.visualstudio.code/config/code/User/
     cp ./app-configs/vscode/settings.json  ~/.var/app/com.visualstudio.code/config/Code/User/settings.json
     rm -rf ./app-configs/
 
