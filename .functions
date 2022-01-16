@@ -7,6 +7,8 @@ update_system() {
 }
 
 setup_machine() {
+    dotfiles remote set-url origin git@github.com:gohanko/dotfiles.git
+
     sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:mkittler/Fedora_34/home:mkittler.repo
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
