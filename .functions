@@ -14,7 +14,7 @@ setup_machine() {
 
     # Install our packages
     sudo dnf install -y gnome-tweaks syncthing syncthingtray util-linux-user yaru-theme tlp
-    flatpak install -y flathub com.visualstudio.code com.github.johnfactotum.Foliate org.keepassxc.KeepassXC org.qbittorrent.qBittorrent org.telegram.desktop com.discordapp.Discord
+    flatpak install -y flathub com.visualstudio.code com.github.johnfactotum.Foliate org.keepassxc.KeepassXC org.qbittorrent.qBittorrent org.telegram.desktop com.discordapp.Discord io.github.celluloid_player.Celluloid
 
     # Remove uneeded packages
     sudo dnf remove -y gnome-weather gnome-help gnome-photos gnome-tour gnome-contacts gnome-calendar gnome-abrt
