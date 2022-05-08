@@ -49,16 +49,16 @@ setup_machine() {
     rfkill block bluetooth
 
     # Setup Nautilus
-    mkdir ~/Syncthing/
-    echo "file:///$HOME/Syncthing/" >> ~/.config/gtk-3.0/bookmarks
-    mkdir ~/Workspace/
-    echo "file:///$HOME/Workspace/" >> ~/.config/gtk-3.0/bookmarks
+    mkdir ~/Documents/Syncthing/
+    echo "file:///$HOME/Documents/Syncthing/" >> ~/.config/gtk-3.0/bookmarks
+    mkdir ~/Documents/Repositories/
+    echo "file:///$HOME/Documents/Repositories/" >> ~/.config/gtk-3.0/bookmarks
 
     # Prepare Syncthing folder for syncing.
-    mkdir ~/Syncthing/'Online Authentication'/
-    mkdir ~/Syncthing/Signal/
-    mkdir ~/Syncthing/Tachiyomi/
-    mkdir -p ~/Syncthing/WhatsApp/Databases/
+    mkdir ~/Documents/Syncthing/'Online Authentication'/
+    mkdir ~/Documents/Syncthing/Signal/
+    mkdir ~/Documents/Syncthing/Tachiyomi/
+    mkdir -p ~/Documents/Syncthing/WhatsApp/Databases/
 
     # Add third party repo for syncthing-tray
     sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:mkittler/Fedora_35/home:mkittler.repo
