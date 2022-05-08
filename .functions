@@ -7,6 +7,7 @@ update_system() {
 }
 
 setup_machine() {
+    source ~/.bashrc
     dotfiles remote set-url origin git@github.com:gohanko/dotfiles.git
 
     # Setting gnome shell styles
@@ -57,7 +58,7 @@ setup_machine() {
     mkdir ~/Syncthing/'Online Authentication'/
     mkdir ~/Syncthing/Signal/
     mkdir ~/Syncthing/Tachiyomi/
-    mkdir ~/Syncthing/WhatsApp/Databases/
+    mkdir -p ~/Syncthing/WhatsApp/Databases/
 
     # Add third party repo for syncthing-tray
     sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:mkittler/Fedora_35/home:mkittler.repo
@@ -72,14 +73,15 @@ setup_machine() {
     # Remove uneeded packages
     sudo dnf remove -y gnome-weather gnome-help gnome-photos gnome-tour gnome-contacts gnome-calendar gnome-abrt libreoffice-writer libreoffice-calc  libreoffice-impress
     sudo dnf autoremove -y
-s
 
     # Copying config files
-    git clone https://github.com/gohanko/app-configs
-    sudo cp ./app-configs/firefox/policies.json /usr/lib64/firefox/distribution/policies.json
+    git clone https://github.com/gohanko/application-configurations
+    
+    sudo cp ./application-configurations/firefox/policies.json /usr/lib64/firefox/distribution/policies.json
     mkdir -p ~/.var/app/com.visualstudio.code/config/code/User/
-    cp ./app-configs/vscode/settings.json  ~/.var/app/com.visualstudio.code/config/Code/User/settings.json
-    rm -rf ./app-configs/
+    
+    cp ./application-configurations/vscode/settings.json  ~/.var/app/com.visualstudio.code/config/Code/User/settings.json
+    rm -rf ./application-configurations/
 
     echo "Please restart the machine for some changes to take effect."
 }
