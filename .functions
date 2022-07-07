@@ -67,8 +67,8 @@ setup_machine() {
     update_system
 
     # Install our packages
-    sudo dnf install -y gnome-tweaks syncthing syncthingtray util-linux-user yaru-theme tlp
-    flatpak install -y flathub com.visualstudio.code com.github.johnfactotum.Foliate org.keepassxc.KeepassXC org.qbittorrent.qBittorrent org.telegram.desktop com.discordapp.Discord io.github.celluloid_player.Celluloid com.wps.Office
+    sudo dnf install -y gnome-tweaks syncthing syncthingtray util-linux-user yaru-theme tlp ffmpeg-free
+    flatpak install -y flathub com.visualstudio.code com.github.johnfactotum.Foliate org.keepassxc.KeepassXC org.qbittorrent.qBittorrent org.telegram.desktop com.discordapp.Discord io.github.celluloid_player.Celluloid com.wps.Office com.microsoft.Teams
 
     # Remove uneeded packages
     sudo dnf remove -y gnome-weather gnome-help gnome-photos gnome-tour gnome-contacts gnome-calendar gnome-abrt libreoffice-writer libreoffice-calc  libreoffice-impress
