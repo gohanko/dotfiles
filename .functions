@@ -6,10 +6,7 @@ update_system() {
     flatpak update -y
 }
 
-setup_machine() {
-    source ~/.bashrc
-    dotfiles remote set-url origin git@github.com:gohanko/dotfiles.git
-
+set_gsettings() {
     # Setting gnome shell styles
     gsettings set org.gnome.desktop.wm.preferences button-layout appmenu:minimize,maximize,close
     gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
@@ -44,6 +41,24 @@ setup_machine() {
 
     # Set favourite apps
     gsettings set org.gnome.shell favorite-apps "['firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Software.desktop', 'org.keepassxc.KeePassXC.desktop', 'org.qbittorrent.qBittorrent.desktop', 'com.discordapp.Discord.desktop', 'org.telegram.desktop.desktop', 'com.github.johnfactotum.Foliate.desktop', 'com.visualstudio.code.desktop']"
+}
+
+set_config_files() {
+    # Copying config files
+    git clone https://github.com/gohanko/application-configurations
+    
+    sudo cp ./application-configurations/firefox/policies.json /usr/lib64/firefox/distribution/policies.json
+    mkdir -p ~/.var/app/com.visualstudio.code/config/code/User/
+    
+    cp ./application-configurations/vscode/settings.json  ~/.var/app/com.visualstudio.code/config/Code/User/settings.json
+    rm -rf ./application-configurations/
+}
+
+setup_system() {
+    source ~/.bashrc
+    dotfiles remote set-url origin git@github.com:gohanko/dotfiles.git
+
+    set_gsettings
 
     # Setting system settings
     rfkill block bluetooth
@@ -67,21 +82,15 @@ setup_machine() {
     update_system
 
     # Install our packages
-    sudo dnf install -y gnome-tweaks syncthing syncthingtray util-linux-user yaru-theme tlp ffmpeg-free
+    sudo dnf install -y gnome-tweaks syncthing syncthingtray util-linux-user yaru-theme ffmpeg-free
     flatpak install -y flathub com.visualstudio.code com.github.johnfactotum.Foliate org.keepassxc.KeepassXC org.qbittorrent.qBittorrent org.telegram.desktop com.discordapp.Discord io.github.celluloid_player.Celluloid com.wps.Office com.microsoft.Teams
 
     # Remove uneeded packages
     sudo dnf remove -y gnome-weather gnome-help gnome-photos gnome-tour gnome-contacts gnome-calendar gnome-abrt libreoffice-writer libreoffice-calc  libreoffice-impress
     sudo dnf autoremove -y
 
-    # Copying config files
-    git clone https://github.com/gohanko/application-configurations
-    
-    sudo cp ./application-configurations/firefox/policies.json /usr/lib64/firefox/distribution/policies.json
-    mkdir -p ~/.var/app/com.visualstudio.code/config/code/User/
-    
-    cp ./application-configurations/vscode/settings.json  ~/.var/app/com.visualstudio.code/config/code/User/settings.json
-    rm -rf ./application-configurations/
+    # Set config files
+    set_config_files
 
     echo "Please restart the machine for some changes to take effect."
 }
