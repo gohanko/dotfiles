@@ -75,6 +75,9 @@ setup_system() {
     mkdir ~/Documents/Syncthing/Tachiyomi/
     mkdir -p ~/Documents/Syncthing/WhatsApp/Databases/
 
+    # Enable free and non-free RPMFusion repositories
+    sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
     # Add third party repo for syncthing-tray
     sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:mkittler/Fedora_35/home:mkittler.repo
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -82,7 +85,7 @@ setup_system() {
     update_system
 
     # Install our packages
-    sudo dnf install -y gnome-tweaks syncthing syncthingtray util-linux-user yaru-theme ffmpeg-free
+    sudo dnf install -y gnome-tweaks syncthing syncthingtray util-linux-user yaru-theme ffmpeg ffmpeg-devel
     flatpak install -y flathub com.visualstudio.code com.github.johnfactotum.Foliate org.keepassxc.KeepassXC org.qbittorrent.qBittorrent org.telegram.desktop com.discordapp.Discord io.github.celluloid_player.Celluloid com.wps.Office com.microsoft.Teams
 
     # Remove uneeded packages
