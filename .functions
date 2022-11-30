@@ -9,16 +9,11 @@ update_system() {
 set_gsettings() {
     # Setting gnome shell styles
     gsettings set org.gnome.desktop.wm.preferences button-layout appmenu:minimize,maximize,close
+    gsettings set org.gnome.desktop.interface color-scheme prefer-dark
     gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
     gsettings set org.gnome.desktop.interface icon-theme Yaru
     gsettings set org.gnome.desktop.interface show-battery-percentage true
 
-    # Setting background picture
-    gsettings set org.gnome.desktop.screensaver picture-options zoom
-    gsettings set org.gnome.desktop.screensaver picture-uri file:///usr/share/backgrounds/fedora-workstation/aurora-over-iceland.png
-    gsettings set org.gnome.desktop.screensaver primary-color '#000000000000'
-    gsettings set org.gnome.desktop.screensaver secondary-color '#000000000000'
-    
     # Setting keyboard shortcuts
     gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
 
@@ -73,13 +68,12 @@ setup_system() {
     mkdir ~/Documents/Syncthing/'Online Authentication'/
     mkdir ~/Documents/Syncthing/Signal/
     mkdir ~/Documents/Syncthing/Tachiyomi/
-    mkdir -p ~/Documents/Syncthing/WhatsApp/Databases/
 
     # Enable free and non-free RPMFusion repositories
     sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
-    # Add third party repo for syncthing-tray
-    sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:mkittler/Fedora_35/home:mkittler.repo
+    # Add third party repo for syncthing-tray (update everytime fedora has a new version)
+    sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:mkittler/Fedora_37/home:mkittler.repo
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
     update_system
