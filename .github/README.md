@@ -8,3 +8,5 @@ My dotfiles for a Fedora 35 workstation.
 `alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'`
 
 `rm .bashrc && dotfiles checkout && exit`
+
+`dotfiles remote set-url origin git@github.com:gohanko/dotfiles.git`
