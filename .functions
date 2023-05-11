@@ -51,7 +51,6 @@ set_config_files() {
 
 setup_system() {
     source ~/.bashrc
-    dotfiles remote set-url origin git@github.com:gohanko/dotfiles.git
 
     set_gsettings
 
@@ -76,14 +75,16 @@ setup_system() {
     # sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:mkittler/Fedora_38/home:mkittler.repo
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     
+    # Remove uneeded software
+    sudo dnf remove -y gnome-weather gnome-help gnome-photos gnome-tour gnome-contacts gnome-calendar gnome-abrt libreoffice-writer libreoffice-calc  libreoffice-impress
+    
     update_system
 
     # Install our packages
     sudo dnf install -y gnome-tweaks
-    flatpak install -y flathub com.visualstudio.code org.keepassxc.KeepassXC io.github.celluloid_player.Celluloid
+    flatpak install -y flathub com.visualstudio.code org.keepassxc.KeePassXC io.github.celluloid_player.Celluloid
 
     # Remove uneeded packages
-    sudo dnf remove -y gnome-weather gnome-help gnome-photos gnome-tour gnome-contacts gnome-calendar gnome-abrt libreoffice-writer libreoffice-calc  libreoffice-impress
     sudo dnf autoremove -y
 
     # Set config files
