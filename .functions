@@ -81,8 +81,9 @@ setup_system() {
     update_system
 
     # Install our packages
-    sudo dnf install -y gnome-tweaks
-    flatpak install -y flathub com.visualstudio.code org.keepassxc.KeePassXC io.github.celluloid_player.Celluloid
+    sudo dnf install -y gnome-tweaks yaru-theme 
+    sudo dnf install -y ffmpeg ffmpeg-devel --allowerasing
+    flatpak install -y flathub com.visualstudio.code org.keepassxc.KeePassXC io.github.celluloid_player.Celluloid com.wps.Office
 
     # Remove uneeded packages
     sudo dnf autoremove -y
