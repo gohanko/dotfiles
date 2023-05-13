@@ -80,6 +80,9 @@ setup_system() {
     
     update_system
 
+    # Install Gnome Extensions
+    sudo dnf install -y gnome-shell-extension-appindicator
+
     # Install our packages
     sudo dnf install -y gnome-tweaks yaru-theme syncthing syncthingtray
     sudo dnf install -y ffmpeg ffmpeg-devel --allowerasing
