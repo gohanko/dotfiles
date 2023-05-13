@@ -72,7 +72,7 @@ setup_system() {
     sudo dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
     # Add third party repo for syncthing-tray (NOTE: please update everytime fedora has a new version)
-    # sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:mkittler/Fedora_38/home:mkittler.repo
+    sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:mkittler/Fedora_38/home:mkittler.repo
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
     
     # Remove uneeded software
@@ -81,7 +81,7 @@ setup_system() {
     update_system
 
     # Install our packages
-    sudo dnf install -y gnome-tweaks yaru-theme 
+    sudo dnf install -y gnome-tweaks yaru-theme syncthing syncthingtray
     sudo dnf install -y ffmpeg ffmpeg-devel --allowerasing
     flatpak install -y flathub com.visualstudio.code org.keepassxc.KeePassXC io.github.celluloid_player.Celluloid com.wps.Office
 
