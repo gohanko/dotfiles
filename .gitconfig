@@ -3,3 +3,5 @@
 # Please adapt and uncomment the following lines:
 	name = 俞國忠 / Yii Kuo Chong (Brandon)
 	email = byu1628@proton.me
+[init]
+	defaultBranch = main
