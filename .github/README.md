@@ -1,5 +1,5 @@
 # dotfiles
-My dotfiles for a Fedora 38 workstation.
+My dotfiles for a Fedora 42 workstation.
 
 # Usage
 
