@@ -5,3 +5,5 @@
 	email = byu1628@proton.me
 [init]
 	defaultBranch = main
+[color]
+	ui = auto
