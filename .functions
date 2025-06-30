@@ -54,9 +54,6 @@ setup_repositories() {
 
     # Setup FlatHub
     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    
-    # Setup Syncthing Tray Repository
-    sudo dnf config-manager --add-repo https://download.opensuse.org/repositories/home:mkittler/Fedora_$(rpm -E %fedora)/home:mkittler.repo
 }
 
 remove_unneeded_packages() {
@@ -72,9 +69,7 @@ update_packages() {
 
 install_default_packages() {
     sudo dnf install -y gnome-shell-extension-appindicator
-    sudo dnf install -y syncthing syncthingtray
-    sudo dnf install -y ffmpeg ffmpeg-devel --allowerasing
-    flatpak install -y flathub com.visualstudio.code org.keepassxc.KeePassXC
+    flatpak install -y flathub com.visualstudio.code org.keepassxc.KeePassXC io.github.martchus.syncthingtray
 
     sudo dnf autoremove -y
 }
