@@ -27,7 +27,7 @@ setup_directories_and_bookmarks() {
     mkdir ~/Syncthing/
     mkdir -p ~/Syncthing/'Online Authentication'/
     mkdir -p ~/Syncthing/Signal/
-    mkdir -p ~/Syncthing/Tachiyomi/
+    mkdir -p ~/Syncthing/Mihon/
     
     mkdir ~/Repositories/
 
