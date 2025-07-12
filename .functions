@@ -21,6 +21,9 @@ configure_gsettings() {
 
     # Set favourite apps
     gsettings set org.gnome.shell favorite-apps "['firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Software.desktop', 'org.keepassxc.KeePassXC.desktop', 'org.telegram.desktop.desktop', 'com.visualstudio.code.desktop']"
+
+    # Alt+Tab only switches between windows in the current workspace
+    gsettings set org.gnome.shell.app-switcher current-workspace-only true
 }
 
 setup_directories_and_bookmarks() {
